@@ -3,10 +3,10 @@ import { useEffect, useRef, useReducer } from 'react';
 function repeter(state, action) {
   switch (action.type) {
     case 'incriment':
-      return state + action.payload;
+      return { ...state, count: state.count + action.payload };
 
     case 'dicrement':
-      return state - action.payload;
+      return { ...state, count: state.count - action.payload };
 
     default:
       throw new Error(`Unsuport action type ${action.type}`);
@@ -16,7 +16,9 @@ function repeter(state, action) {
 export default function Count() {
   // const [count, setCount] = useState(0);
   const isNotRender = useRef(true);
-  const [count, dispatch] = useReducer(repeter, 0);
+  const [state, dispatch] = useReducer(repeter, {
+    count: 0,
+  });
 
   useEffect(() => {
     if (isNotRender.current) {
@@ -28,7 +30,7 @@ export default function Count() {
 
   return (
     <div>
-      <p>{count}</p>
+      <p>{state.count}</p>
       <button onClick={() => dispatch({ type: 'incriment', payload: 1 })}>
         Увеличить
       </button>
