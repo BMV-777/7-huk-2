@@ -1,6 +1,7 @@
 // import Count from 'components/Counter/Counter';
 // import Friends from 'Friend/Friends';
 import { Prob } from 'components/Prob/Prob';
+import { Container } from 'components/Prob/Proba.styled';
 
 const userId = [
   { id: 1, name: 'Gren', age: 20 },
@@ -12,7 +13,9 @@ const userId = [
 function App() {
   return (
     <div>
-      <Prob item={userId} />
+      <Container>
+        <Prob item={userId} />
+      </Container>
       {/* {userId.map(users => (
         <Prob key={users.id} name={users.name} age={users.age} />
       ))} */}

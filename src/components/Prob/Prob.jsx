@@ -4,17 +4,21 @@
 //   { id: 3, name: 'Ben', age: 30 },
 //   { id: 4, name: 'Mery', age: 35 },
 // ];
+
+import { Card } from './Proba.styled';
+import { Ulion } from './Proba.styled';
+
 export const Prob = ({ item }) => {
   // const { id, name, age } = items;
   return (
-    <div>
+    <Card>
       {item.map(items => (
         <ul key={items.id}>
           {items.id}
-          <li name={items.name}>{items.name}</li>
+          <Ulion name={items.name}>{items.name}</Ulion>
           <li age={items.age}>{items.age}</li>
         </ul>
       ))}
-    </div>
+    </Card>
   );
 };
