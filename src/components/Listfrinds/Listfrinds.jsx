@@ -1,18 +1,23 @@
+import { TfiApple } from 'react-icons/tfi';
+import { Container, Cards, Span } from './Listfrinds.styled';
+
 export const FriendsList = ({ friends }) => {
   return (
-    <ul class="friend-list">
+    <Container class="friend-list">
       {friends.map(item => (
-        <li key={item.id}>
-          <span className={item.isOnline}>{item.isOnline}</span>
+        <Cards key={item.id}>
+          <Span isOnline={item.isOnline}>
+            <TfiApple />
+          </Span>
           <img
-            className={item.avatar}
+            className="avatar"
             src={item.avatar}
             alt={item.name}
-            width="48"
+            width="38"
           />
-          <p class={item.name}></p>
-        </li>
+          <p className="name">{item.name}</p>
+        </Cards>
       ))}
-    </ul>
+    </Container>
   );
 };
