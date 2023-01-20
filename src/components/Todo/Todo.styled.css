@@ -1,0 +1,14 @@
+.TodoList {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding: 5px;
+  border: 2px solid black;
+}
+
+.TodoClass {
+  width: 400px;
+  /* border: 2px solid black; */
+  height: 50px;
+}

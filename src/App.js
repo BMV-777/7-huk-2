@@ -4,8 +4,8 @@
 // import { Container } from 'components/Prob/Proba.styled';
 // import { AppBar } from 'components/AppBar/AppBar';
 // import inpute from './input.json';
-import { FriendsList } from 'components/Listfrinds/Listfrinds';
-// import { friends } from './friends.json';
+// import { FriendsList } from 'components/Listfrinds/Listfrinds';
+// import friends from './friends.json';
 // const userId = [
 //   { id: 1, name: 'Gren', age: 20 },
 //   { id: 2, name: 'Men', age: 25 },
@@ -13,81 +13,61 @@ import { FriendsList } from 'components/Listfrinds/Listfrinds';
 //   { id: 4, name: 'Mery', age: 35 },
 // ];
 
-const friends = [
-  {
-    id: 1,
-    avatar:
-      'https://vjoy.cc/wp-content/uploads/2020/11/9ada3bc305a1f45eab527f60da172d53.png',
-    name: 'Mari',
-    isOnline: true,
-  },
-  {
-    id: 2,
-    avatar:
-      'https://vjoy.cc/wp-content/uploads/2020/11/9ada3bc305a1f45eab527f60da172d53.png',
-    name: 'M',
-    isOnline: false,
-  },
-  {
-    id: 3,
-    avatar: 'https://klike.net/uploads/posts/2019-03/medium/1551512888_2.jpg',
-    name: 'Enot',
-    isOnline: false,
-  },
-  {
-    id: 4,
-    avatar: 'https://klike.net/uploads/posts/2019-03/1551511801_1.jpg',
-    name: 'Cat',
-    isOnline: true,
-  },
-  {
-    id: 5,
-    avatar:
-      'https://bipbap.ru/wp-content/uploads/2021/07/unikal-nye-kartinki-na-avu-vk-i-odnoklassniki-samye-krasivye-2.jpg',
-    name: 'Asassin',
-    isOnline: true,
-  },
-  {
-    id: 6,
-    avatar:
-      'https://bipbap.ru/wp-content/uploads/2021/07/unikal-nye-kartinki-na-avu-vk-i-odnoklassniki-samye-krasivye-2.jpg',
-    name: 'Vedro',
-    isOnline: false,
-  },
-  {
-    id: 7,
-    avatar:
-      'https://www.meme-arsenal.com/memes/42302aa704d6b36a703b76ce8d82d4a4.jpg',
-    name: 'Venom',
-    isOnline: true,
-  },
-];
+import { Component } from 'react';
+// import Todo from 'components/Todo/Todo';
+import Price from 'components/Price/Price';
+import transaction from './transaction.json';
 
-function App() {
-  return (
-    <div>
-      <FriendsList friends={friends} />
-      {/* <Container>
-        
-        <Prob item={userId} />
-      </Container> */}
-      {/* <AppBar
-        user={{
-          username: 'Maks vsemogushi',
-          isOnline: true,
-          points: {
-            total: 200,
-            required: 700,
-          },
-        }}
-      /> */}
-      {/* {userId.map(users => (
-        <Prob key={users.id} name={users.name} age={users.age} />
-      ))} */}
-      {/* <Count /> */}
-      {/* <Friends /> */}
-    </div>
-  );
+// import Dropdown from 'components/Drobdaun/Drobdaun';
+
+class App extends Component {
+  state = {
+    todos: [{ id: 'id-1', text: 'Выучить React', completed: true }],
+  };
+
+  handelDelete = todoId => {
+    this.setState(prevState => ({
+      todos: prevState.todos.filter(todo => todo.id !== todoId),
+    }));
+  };
+
+  render() {
+    const { todos } = this.state;
+    const completeTodu = todos.reduce(
+      (acc, todo) => (todo.completed ? acc + 1 : acc),
+      0
+    );
+    return (
+      <div>
+        <Price items={transaction} />
+        {/* <Todo todos={todos} onDeleteTodo={this.handelDelete} /> */}
+
+        <p>Общее количество todo: {todos.length}</p>
+        <p>Колич-тво выполниных: {completeTodu}</p>
+        {/* <Dropdown /> */}
+        {/* <FriendsList friends={friends} /> */}
+        {/* <Container>
+          
+          <Prob item={userId} />
+        </Container> */}
+        {/* <AppBar
+          user={{
+            username: 'Maks vsemogushi',
+            isOnline: true,
+            points: {
+              total: 200,
+              required: 700,
+            },
+          }}
+        /> */}
+        {/* {userId.map(users => (
+          <Prob key={users.id} name={users.name} age={users.age} />
+        ))} */}
+        {/* <Count /> */}
+        {/* <Friends /> */}
+      </div>
+    );
+  }
 }
 
 export default App;
