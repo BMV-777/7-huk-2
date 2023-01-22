@@ -9,7 +9,6 @@ function Price({ items }) {
           <th className={styles.title}>Type</th>
           <th className={styles.title}>Amount</th>
           <th className={styles.title}>Currency</th>
-          <th className={styles.title}>Currency</th>
         </tr>
       </thead>
       {items.map(item => (

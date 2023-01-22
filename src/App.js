@@ -15,8 +15,9 @@
 
 import { Component } from 'react';
 // import Todo from 'components/Todo/Todo';
-import Price from 'components/Price/Price';
-import transaction from './transaction.json';
+// import Price from 'components/Price/Price';
+// import transaction from './transaction.json';
+import Form from './components/Form/Form.jsx';
 
 // import Dropdown from 'components/Drobdaun/Drobdaun';
 
@@ -31,19 +32,24 @@ class App extends Component {
     }));
   };
 
+  formSubmitHandler = data => {
+    console.log(data);
+  };
+
   render() {
-    const { todos } = this.state;
-    const completeTodu = todos.reduce(
-      (acc, todo) => (todo.completed ? acc + 1 : acc),
-      0
-    );
+    // const { todos } = this.state;
+    // const completeTodo = todos.reduce(
+    //   (acc, todo) => (todo.completed ? acc + 1 : acc),
+    //   0);
+
     return (
       <div>
-        <Price items={transaction} />
+        <Form onSubmit={this.formSubmitHandler} />
+        {/* <Price items={transaction} /> */}
         {/* <Todo todos={todos} onDeleteTodo={this.handelDelete} /> */}
 
-        <p>Общее количество todo: {todos.length}</p>
-        <p>Колич-тво выполниных: {completeTodu}</p>
+        {/* <p>Общее количество todo: {todos.length}</p>
+        <p>Колич-тво выполниных: {completeTodo}</p> */}
         {/* <Dropdown /> */}
         {/* <FriendsList friends={friends} /> */}
         {/* <Container>
