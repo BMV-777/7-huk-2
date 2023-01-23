@@ -36,6 +36,15 @@ class App extends Component {
     console.log(data);
   };
 
+  handlerProbaForm = e => {
+    e.preventDefault();
+    console.log(e.target.elements.password);
+    console.log(
+      e.target.elements.password.value,
+      e.target.elements.login.value
+    );
+  };
+
   render() {
     // const { todos } = this.state;
     // const completeTodo = todos.reduce(
@@ -44,6 +53,15 @@ class App extends Component {
 
     return (
       <div>
+        <form autoCapitalize="off" onSubmit={this.handlerProbaForm}>
+          <label htmlFor="login">
+            Login <input type="text" name="login" />
+          </label>
+          <label htmlFor="password">
+            Password <input type="text" name="password" />
+          </label>
+          <button type="submit">Hi</button>
+        </form>
         <Form onSubmit={this.formSubmitHandler} />
         {/* <Price items={transaction} /> */}
         {/* <Todo todos={todos} onDeleteTodo={this.handelDelete} /> */}
