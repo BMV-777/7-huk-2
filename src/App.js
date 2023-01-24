@@ -20,12 +20,16 @@ import { Component } from 'react';
 // import Price from 'components/Price/Price';
 // import transaction from './transaction.json';
 import Form from './components/Form/Form.jsx';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import PokemonForm from 'components/Pocemon/PokemonForm';
+import PokemonInfo from 'components/Pocemon/PokemonInfo';
 
 // import Dropdown from 'components/Drobdaun/Drobdaun';
 
 class App extends Component {
   state = {
-    pokemon: {},
+    pokemonName: '',
   };
   // state = {
   //   todos: [{ id: 'id-1', text: 'Выучить React', completed: true }],
@@ -50,11 +54,15 @@ class App extends Component {
   //   );
   // };
 
-  componentDidMount() {
-    fetch('https://pokeapi.co/api/v2/pokemon/ditto')
-      .then(res => res.json())
-      .then(console.log);
-  }
+  handelSubmitForm = pokemonName => {
+    this.setState({ pokemonName });
+  };
+
+  // componentDidMount() {
+  //   fetch('https://pokeapi.co/api/v2/pokemon/ditto')
+  //     .then(res => res.json())
+  //     .then(pokemon => this.setState({ pokemon }));
+  // }
 
   render() {
     // const { todos } = this.state;
@@ -64,7 +72,11 @@ class App extends Component {
 
     return (
       <div>
+        <PokemonForm onSubmit={this.handelSubmitForm} />
+        <PokemonInfo pokemonName={this.state.pokemonName} />
+
         {this.state.pokemon && <div>Тут будет покемон!!</div>}
+        <ToastContainer />
         {/* <Reader items={item} />
         <br />
         <Form onSubmit={this.formSubmitHandler} /> */}
