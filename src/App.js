@@ -13,23 +13,28 @@
 //   { id: 4, name: 'Mery', age: 35 },
 // ];
 
-import { Reader } from 'components/Reader/Reader.jsx';
-import item from './publication.json';
+// import { Reader } from 'components/Reader/Reader.jsx';
+// import item from './publication.json';
 import { Component } from 'react';
 // import Todo from 'components/Todo/Todo';
 // import Price from 'components/Price/Price';
 // import transaction from './transaction.json';
-import Form from './components/Form/Form.jsx';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import PokemonForm from 'components/Pocemon/PokemonForm';
-import PokemonInfo from 'components/Pocemon/PokemonInfo';
-
+// import Form from './components/Form/Form.jsx';
+// import { ToastContainer } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
+// import PokemonForm from 'components/Pocemon/PokemonForm';
+// import PokemonInfo from 'components/Pocemon/PokemonInfo';
+import { MaterialForm } from 'components/MaterialsForm/MaterialsForm';
+import * as API from './components/server/server';
+import { Materials } from 'components/MaterialsForm/Materials';
 // import Dropdown from 'components/Drobdaun/Drobdaun';
 
 class App extends Component {
   state = {
     pokemonName: '',
+    materials: [],
+    isLoading: false,
+    error: null,
   };
   // state = {
   //   todos: [{ id: 'id-1', text: 'Выучить React', completed: true }],
@@ -64,19 +69,86 @@ class App extends Component {
   //     .then(pokemon => this.setState({ pokemon }));
   // }
 
+  async componentDidMount() {
+    try {
+      this.setState({ isLoading: true });
+      const materials = await API.getMaterials();
+      this.setState({ materials, isLoading: false });
+    } catch (error) {
+      this.setState({ error: true, isLoading: false });
+      console.log(error);
+    }
+  }
+
+  addMaterial = async values => {
+    try {
+      const material = await API.addMaterial(values);
+      this.setState(state => ({
+        materials: [...state.materials, material],
+      }));
+    } catch (error) {
+      this.setState({ error: true, isLoading: false });
+      console.log(error);
+    }
+  };
+
+  deleteMaterials = async id => {
+    try {
+      await API.deleteMaterials(id);
+      this.setState(state => ({
+        materials: state.materials.filter(material => material.id !== id),
+      }));
+    } catch (error) {
+      this.setState({ error: true });
+      console.log(error);
+    }
+  };
+
+  updateMaterials = async field => {
+    try {
+      const updateMaterials = await API.updateMaterials(field);
+      this.setState(state => ({
+        materials: state.materials.map(material =>
+          material.ai === field.id ? updateMaterials : material
+        ),
+      }));
+    } catch (error) {
+      this.setState({ error: true });
+      console.log(error);
+    }
+  };
+
   render() {
     // const { todos } = this.state;
     // const completeTodo = todos.reduce(
     //   (acc, todo) => (todo.completed ? acc + 1 : acc),
     //   0);
-
+    const { isLoading, materials, error } = this.state;
     return (
       <div>
-        <PokemonForm onSubmit={this.handelSubmitForm} />
+        {error && (
+          <p>
+            Ой! что то пошло не так :( попробуйти еще раз перезагрузить
+            страницу!
+          </p>
+        )}
+
+        <MaterialForm onSubmit={this.addMaterial} />
+        {isLoading ? (
+          'Загружаем материал!'
+        ) : (
+          <Materials
+            items={materials}
+            onDelete={this.deleteMaterials}
+            onUpdate={this.updateMaterials}
+          />
+        )}
+
+        {/* <PokemonForm onSubmit={this.handelSubmitForm} />
         <PokemonInfo pokemonName={this.state.pokemonName} />
 
         {this.state.pokemon && <div>Тут будет покемон!!</div>}
-        <ToastContainer />
+        <ToastContainer /> */}
         {/* <Reader items={item} />
         <br />
         <Form onSubmit={this.formSubmitHandler} /> */}
