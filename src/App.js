@@ -20,13 +20,14 @@ import { Component } from 'react';
 // import Price from 'components/Price/Price';
 // import transaction from './transaction.json';
 // import Form from './components/Form/Form.jsx';
-// import { ToastContainer } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
-// import PokemonForm from 'components/Pocemon/PokemonForm';
-// import PokemonInfo from 'components/Pocemon/PokemonInfo';
-import { MaterialForm } from 'components/MaterialsForm/MaterialsForm';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import PokemonForm from 'components/Pocemon/PokemonForm';
+import PokemonInfo from 'components/Pocemon/PokemonInfo';
+// import { MaterialForm } from 'components/MaterialsForm/MaterialsForm';
 import * as API from './components/server/server';
-import { Materials } from 'components/MaterialsForm/Materials';
+// import { Materials } from 'components/MaterialsForm/Materials';
+// import { Millets } from 'components/Green/green.jsx';
 // import Dropdown from 'components/Drobdaun/Drobdaun';
 
 class App extends Component {
@@ -123,9 +124,10 @@ class App extends Component {
     // const completeTodo = todos.reduce(
     //   (acc, todo) => (todo.completed ? acc + 1 : acc),
     //   0);
-    const { isLoading, materials, error } = this.state;
+    // const { isLoading, materials, error } = this.state;
     return (
       <div>
+        {/* <Millets />
         {error && (
           <p>
             Ой! что то пошло не так :( попробуйти еще раз перезагрузить
@@ -142,13 +144,13 @@ class App extends Component {
             onDelete={this.deleteMaterials}
             onUpdate={this.updateMaterials}
           />
-        )}
+        )} */}
 
-        {/* <PokemonForm onSubmit={this.handelSubmitForm} />
+        <PokemonForm onSubmit={this.handelSubmitForm} />
         <PokemonInfo pokemonName={this.state.pokemonName} />
 
         {this.state.pokemon && <div>Тут будет покемон!!</div>}
-        <ToastContainer /> */}
+        <ToastContainer />
         {/* <Reader items={item} />
         <br />
         <Form onSubmit={this.formSubmitHandler} /> */}
